@@ -21,7 +21,6 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
-
 android {
     namespace "com.example.flutterproject_firebase_chatapp"
     compileSdkVersion flutter.compileSdkVersion
