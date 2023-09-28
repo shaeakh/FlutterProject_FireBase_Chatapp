@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterproject_firebase_chatapp/widgets/chat/msg_bbl.dart';
 
 class Messeges extends StatelessWidget{
   @override
@@ -19,8 +20,7 @@ class Messeges extends StatelessWidget{
           return ListView.builder(
               reverse: true,
               itemCount: chatSnapshot.data?.docs.length,
-              itemBuilder: (ctx,index) => Text(
-                  chatDocs?[index]['text']),
+              itemBuilder: (ctx,index) => MsgBbl(chatDocs?[index]['text']),
           );
         }
     );
