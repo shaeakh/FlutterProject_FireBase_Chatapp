@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';class AuthForm extends StatefulWidget {
+import 'package:flutter/material.dart';
+class AuthForm extends StatefulWidget {
   @override
   _AuthFormState createState() => _AuthFormState();
 }

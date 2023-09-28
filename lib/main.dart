@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      //home: ChatScreen(),
-      home: AuthScreen(),
+      home: ChatScreen(),
+      //home: AuthScreen(),
     );
   }
 }
