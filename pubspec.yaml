@@ -41,6 +41,10 @@ dependencies:
   firebase_storage: ^11.2.7
   flutter_native_splash: ^2.3.2
   video_player: ^2.7.2
+  google_maps_flutter: ^2.5.0
+  dio: ^5.3.3
+  flutter_polyline_points: ^2.0.0
+
 
 flutter_native_splash:
   color: "ffffff"
