@@ -4,7 +4,6 @@ import 'package:flutterproject_firebase_chatapp/firebase_options.dart';
 import 'package:flutterproject_firebase_chatapp/screens/auth_screen.dart';
 import 'package:flutterproject_firebase_chatapp/screens/chat_screen.dart';
 
-
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -21,7 +20,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Chat',
-
       theme: ThemeData(
         primarySwatch: Colors.pink,
         backgroundColor: Colors.pink,
@@ -34,7 +32,6 @@ class MyApp extends StatelessWidget {
         )
       ),
       home: ChatScreen(),
-      //home:  splashScreen(),
       //home: AuthScreen(),
     );
   }
