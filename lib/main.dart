@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterproject_firebase_chatapp/firebase_options.dart';
 import 'package:flutterproject_firebase_chatapp/screens/auth_screen.dart';
 import 'package:flutterproject_firebase_chatapp/screens/chat_screen.dart';
+import 'package:flutterproject_firebase_chatapp/screens/alert.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      home: ChatScreen(),
-      //home: AuthScreen(),
+      //home: ChatScreen(),
+      home: Alert(),
+      //home:  GglMap(title: 'gglmap',),
     );
   }
 }
