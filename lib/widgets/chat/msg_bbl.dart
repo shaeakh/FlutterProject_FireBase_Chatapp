@@ -10,8 +10,9 @@ class MsgBbl extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
+
       decoration: BoxDecoration(
-        color: Colors.indigoAccent,
+        color: Colors.pink,
         borderRadius: BorderRadius.circular(12),
       ),
       width: 10,

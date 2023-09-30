@@ -8,6 +8,17 @@ class ChatScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
       return Scaffold(
+        appBar: AppBar(
+
+          actions: <Widget>[
+            IconButton(
+                  color: Colors.white,
+                  icon: Icon(Icons.arrow_circle_left),
+                  onPressed: (){},
+                )
+
+          ],
+        ),
          body : Container(
            child: Column(
              children: <Widget>[
