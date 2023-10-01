@@ -366,6 +366,38 @@ class _NeonLightsState extends State<NeonLights> {
                                           ],
                                         ),
                                       ),
+                                      Positioned(
+                                        top: 10,
+                                        right: 14,
+                                        width: 42,
+                                        height: 20,
+                                        child: Stack(
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: Onclick,
+                                              style: ButtonStyle(
+                                                backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(100.0),
+                                                  ),
+                                                ),
+                                              ),
+
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Icon(
+                                                    Icons.close, // Replace with your AI icon
+                                                    color: Colors.white, //
+                                                    size: 10,// Icon color
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
 
                                     ],
                                   ),
