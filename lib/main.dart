@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       //home: ChatScreen(),
-      home: Alert(),
+      home: NeonLights(),
       //home:  GglMap(title: 'gglmap',),
     );
   }
