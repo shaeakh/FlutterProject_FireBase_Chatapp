@@ -6,6 +6,8 @@ import 'package:flutterproject_firebase_chatapp/screens/chat_screen.dart';
 import 'package:flutterproject_firebase_chatapp/screens/alert.dart';
 import 'package:flutterproject_firebase_chatapp/screens/standby.dart';
 
+import 'screens/forum.dart';
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -34,7 +36,8 @@ class MyApp extends StatelessWidget {
         )
       ),
       //home: ChatScreen(),
-      home: NeonLights(),
+      //home: NeonLights(),
+      home: Forum(),
       //home:  GglMap(title: 'gglmap',),
       //home: Standby(),
     );
