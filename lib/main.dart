@@ -7,7 +7,7 @@ import 'package:flutterproject_firebase_chatapp/screens/alert.dart';
 import 'package:flutterproject_firebase_chatapp/screens/standby.dart';
 
 import 'screens/forum.dart';
-
+//672445411355:android:d1516c1929e07c5d3588be
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

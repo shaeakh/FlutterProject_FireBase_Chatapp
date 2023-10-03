@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/Forum/blank.dart';
 import '../widgets/Forum/post.dart';
 import '../widgets/chat/New_Msg.dart';
 import '../widgets/chat/messeges.dart';
@@ -36,7 +37,12 @@ class _Forum extends State<Forum>{
         body : Container(
           child: Column(
             children: <Widget>[
-              PostWidget(),
+              Center(
+                child : Blank(),
+              ),
+              Center(
+                child : PostWidget(),
+              ),
             ],
           ),
         ),

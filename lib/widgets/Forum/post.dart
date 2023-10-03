@@ -27,47 +27,40 @@ class _PostWidgetState extends State<PostWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(40.0),
-          child: TextField(
-            controller: _textEditingController,
-            onChanged: (value) {
-              setState(() {
-                _postText = value;
-              });
-            },
-            decoration: InputDecoration(
-              hintText: "What's on your mind?",
+    final ScreenHeight = MediaQuery.of(context).size.height;
+    final ScreenWeidth = MediaQuery.of(context).size.width;
+    return Container(
+      width: ScreenWeidth-20, // Set the desired width
+      height: 100,
+      child: Stack(
+        children: [
+          Container(
+            alignment: Alignment.center,// Set the desired height
+            decoration: BoxDecoration(
+              color: Colors.transparent, // Set the background color to transparent
+              borderRadius: BorderRadius.circular(20), // Set the border radius
+              border: Border.all(
+                color: Color(0xff212529), // Set the border color
+                width: 2.5, // Set the border width
+              ),
             ),
           ),
-        ),
-        _imagePath.isNotEmpty
-            ? Image.asset(
-          _imagePath,
-          width: 100,
-          height: 100,
-        )
-            : SizedBox(),
-        Stack(
-          children: [
-            Positioned(
-              child:ElevatedButton(
-                onPressed: _postText.isNotEmpty ? _post : null,
-                style:ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xff212529)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                  ),
-                ),
+          Center(
+            child: TextField(
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.transparent,
+                hintText: 'Alert People',
+                contentPadding: EdgeInsets.all(16.0),
               ),
-              child: Text("Post"),
-            ),)
-          ],
-        ),
-      ],
+              style: TextStyle(
+                color: Color(0xff212529),
+              ),
+            ),
+          ),
+        ],
+      ),
+
     );
   }
 }

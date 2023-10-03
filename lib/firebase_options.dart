@@ -55,6 +55,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '672445411355',
     projectId: 'flutter-chattapp',
     authDomain: 'flutter-chattapp.firebaseapp.com',
+    databaseURL: 'https://flutter-chattapp-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'flutter-chattapp.appspot.com',
     measurementId: 'G-CZYSL9XP6X',
   );
@@ -64,6 +65,7 @@ class DefaultFirebaseOptions {
     appId: '1:672445411355:android:d1516c1929e07c5d3588be',
     messagingSenderId: '672445411355',
     projectId: 'flutter-chattapp',
+    databaseURL: 'https://flutter-chattapp-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'flutter-chattapp.appspot.com',
   );
 }
