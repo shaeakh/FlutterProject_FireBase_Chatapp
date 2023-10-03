@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PostWidget extends StatefulWidget {
   @override
@@ -29,6 +33,7 @@ class _PostWidgetState extends State<PostWidget> {
   Widget build(BuildContext context) {
     final ScreenHeight = MediaQuery.of(context).size.height;
     final ScreenWeidth = MediaQuery.of(context).size.width;
+    String imgurl = "";
     return Container(
       width: ScreenWeidth-20, // Set the desired width
       height: 100,
@@ -48,13 +53,60 @@ class _PostWidgetState extends State<PostWidget> {
           Center(
             child: TextField(
               decoration: InputDecoration(
-                filled: true,
+                filled: false,
                 fillColor: Colors.transparent,
                 hintText: 'Alert People',
                 contentPadding: EdgeInsets.all(16.0),
               ),
               style: TextStyle(
                 color: Color(0xff212529),
+              ),
+            ),
+          ),
+          Positioned(
+            top:50,
+              right: 10,
+              child: ElevatedButton(
+                onPressed: (){},
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+                child: Text('Post', style: TextStyle(color: Color(0xffffffff))),
+              ),
+          ),
+          Positioned(
+            top:50,
+            right: 70,
+            child:Container(
+              child: IconButton(
+                color: Color(0xff212529),
+
+                icon: Icon(Icons.image),
+                onPressed: () async {
+                  String filename = DateTime.now().microsecondsSinceEpoch.toString();
+
+                  ImagePicker img_pik = ImagePicker();
+                  XFile? file = await img_pik.pickImage(source: ImageSource.camera);
+                  print('${file?.path}');
+                  if(file == null) return;
+                  Reference referenceRoot = FirebaseStorage.instance.ref();
+                  Reference refDirImgs=referenceRoot.child('images');
+
+                  Reference reftoimgUpload = refDirImgs.child(filename);
+                  try{
+                    await reftoimgUpload.putFile(File(file!.path));
+                    imgurl = await reftoimgUpload.getDownloadURL();
+
+                  }catch(error){
+
+                  }
+
+                },
               ),
             ),
           ),

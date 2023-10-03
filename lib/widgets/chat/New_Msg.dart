@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:geolocator/geolocator.dart';
 
 class New_Msg extends StatefulWidget{
   @override
@@ -11,18 +12,30 @@ class New_Msg extends StatefulWidget{
 }
 
 class _New_Msg extends State<New_Msg>{
+  String imgurl = '';
   final _controller = new TextEditingController();
   var _enteredMsg = '';
-  void _sendMsg(){
+  bool img_click = false;
+  Future<void> _sendMsg(String imgurl,var _enteredMsg) async {
+    Position position = await getLoc();
     FocusScope.of(context).unfocus();
     FirebaseFirestore.instance.collection('chat').add({
       'text' : _enteredMsg,
       'time' : Timestamp.now(),
+      'image': imgurl,
+      'Lat' :'${position.latitude}',
+      'Long': '${position.longitude}',
     });
     _controller.clear();
+
+  }
+  Future<Position> getLoc() async{
+    await Geolocator.checkPermission();
+    await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
+    return position;
   }
 
-  String imgurl = '';
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,6 +58,7 @@ class _New_Msg extends State<New_Msg>{
             color: Theme.of(context).primaryColor,
             icon: Icon(Icons.image),
             onPressed: () async {
+
               String filename = DateTime.now().microsecondsSinceEpoch.toString();
 
               ImagePicker img_pik = ImagePicker();
@@ -55,20 +69,17 @@ class _New_Msg extends State<New_Msg>{
               Reference refDirImgs=referenceRoot.child('images');
 
               Reference reftoimgUpload = refDirImgs.child(filename);
-              try{
-                await reftoimgUpload.putFile(File(file!.path));
+                await reftoimgUpload.putFile(File(file.path));
                 imgurl = await reftoimgUpload.getDownloadURL();
-
-              }catch(error){
-
-              }
-
             },
           ),
           IconButton(
             color: Colors.pink,
             icon: Icon(Icons.send),
-            onPressed: _enteredMsg.trim().isEmpty? null : _sendMsg,
+            onPressed: (){
+              _sendMsg(imgurl,_enteredMsg);
+              imgurl = '';
+            }
           )
         ],
       ),

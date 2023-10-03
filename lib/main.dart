@@ -35,9 +35,9 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      //home: ChatScreen(),
+      home: ChatScreen(),
       //home: NeonLights(),
-      home: Forum(),
+      //home: Forum(),
       //home:  GglMap(title: 'gglmap',),
       //home: Standby(),
     );
