@@ -2,6 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/Forum/post.dart';
+import '../widgets/chat/New_Msg.dart';
+import '../widgets/chat/messeges.dart';
+
 class Forum extends StatefulWidget{
   @override
   State<Forum>createState() => _Forum() ;
@@ -15,7 +19,7 @@ class _Forum extends State<Forum>{
       theme: ThemeData(fontFamily: "Space grotesk"),
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        length: 5,
+        length: 3,
       child :Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -26,7 +30,13 @@ class _Forum extends State<Forum>{
               Tab(child: Icon(Icons.home)),
               Tab(child: Icon(Icons.people)),
               Tab(child: Icon(Icons.android_outlined)),
-              Tab(child: Icon(Icons.home)),
+            ],
+          ),
+        ),
+        body : Container(
+          child: Column(
+            children: <Widget>[
+              PostWidget(),
             ],
           ),
         ),
