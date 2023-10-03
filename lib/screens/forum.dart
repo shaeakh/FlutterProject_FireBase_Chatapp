@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutterproject_firebase_chatapp/widgets/Forum/timeline.dart';
 import '../widgets/Forum/blank.dart';
 import '../widgets/Forum/post.dart';
 import '../widgets/chat/New_Msg.dart';
@@ -34,16 +36,21 @@ class _Forum extends State<Forum>{
             ],
           ),
         ),
-        body : Container(
-          child: Column(
-            children: <Widget>[
-              Center(
-                child : Blank(),
-              ),
-              Center(
-                child : PostWidget(),
-              ),
-            ],
+        body : Scaffold(
+          body: Container(
+            child: Column(
+              children: <Widget>[
+                Center(
+                  child : Blank(),
+                ),
+                Center(
+                  child : PostWidget(),
+                ),
+                Expanded(
+                  child: Timeline(),
+                ),
+              ],
+            ),
           ),
         ),
       ),

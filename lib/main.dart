@@ -25,19 +25,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Chat',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
-        backgroundColor: Colors.pink,
+        primarySwatch: Colors.blueGrey,
+        backgroundColor: Color(0xff212529),
         //colorScheme: ColorScheme.dark(), // this is dark mood
         buttonTheme: ButtonTheme.of(context).copyWith(
-          buttonColor: Colors.pink,
+          buttonColor: Color(0xff343A40),
           textTheme: ButtonTextTheme.primary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
-          )
-        )
+          ),
+        ),
       ),
-      home: ChatScreen(),
+      //home: ChatScreen(),
       //home: NeonLights(),
-      //home: Forum(),
+      home: Forum(),
       //home:  GglMap(title: 'gglmap',),
       //home: Standby(),
     );

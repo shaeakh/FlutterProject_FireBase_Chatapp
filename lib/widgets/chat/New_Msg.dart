@@ -48,6 +48,7 @@ class _New_Msg extends State<New_Msg>{
             decoration: InputDecoration(labelText: 'Send a Messege...'),
             onChanged: (value){
               setState(() {
+
                 _enteredMsg = value;
               });
             },

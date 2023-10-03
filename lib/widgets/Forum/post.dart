@@ -1,58 +1,60 @@
 import 'dart:io';
-
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:geolocator/geolocator.dart';
 
-class PostWidget extends StatefulWidget {
+class PostWidget extends StatefulWidget{
   @override
-  _PostWidgetState createState() => _PostWidgetState();
+  _PostWidget createState() => _PostWidget() ;
 }
 
-class _PostWidgetState extends State<PostWidget> {
-  TextEditingController _textEditingController = TextEditingController();
-  String _postText = "";
-  String _imagePath = "";
+class _PostWidget extends State<PostWidget>{
+  String _imgUrl = '';
+  final _controller = new TextEditingController();
+  var _enteredMsg = '';
+  bool img_click = false;
+  CollectionReference _reference =
+  FirebaseFirestore.instance.collection('chat');
+  Future<void> _sendMsg(String _imgUrl,var _enteredMsg) async {
+    if (_imgUrl.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Please upload an image')));
 
-  void _post() {
-    // You can implement the logic to post the text and image here.
-    // For this example, we'll just print the text and image path.
-    print("Text: $_postText");
-    print("Image Path: $_imagePath");
+      return;
+    }
+    Position position = await getLoc();
+    FocusScope.of(context).unfocus();
+    FirebaseFirestore.instance.collection('chat').add({
+      'text' : _enteredMsg,
+      'time' : Timestamp.now(),
+      'image': _imgUrl,
+      'Lat' :'${position.latitude}',
+      'Long': '${position.longitude}',
+    });g
+    _controller.clear();
+    _imgUrl = '';
+
   }
-
-  void _selectImage() {
-    // Implement logic to select an image from the device's gallery or camera.
-    // For simplicity, we'll just set a placeholder image path.
-    setState(() {
-      _imagePath = "path_to_selected_image.jpg";
-    });
+  Future<Position> getLoc() async{
+    await Geolocator.checkPermission();
+    await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
+    return position;
   }
 
   @override
   Widget build(BuildContext context) {
-    final ScreenHeight = MediaQuery.of(context).size.height;
-    final ScreenWeidth = MediaQuery.of(context).size.width;
-    String imgurl = "";
     return Container(
-      width: ScreenWeidth-20, // Set the desired width
-      height: 100,
-      child: Stack(
-        children: [
-          Container(
-            alignment: Alignment.center,// Set the desired height
-            decoration: BoxDecoration(
-              color: Colors.transparent, // Set the background color to transparent
-              borderRadius: BorderRadius.circular(20), // Set the border radius
-              border: Border.all(
-                color: Color(0xff212529), // Set the border color
-                width: 2.5, // Set the border width
-              ),
-            ),
-          ),
-          Center(
-            child: TextField(
-              decoration: InputDecoration(
+      margin: EdgeInsets.only(top: 8),
+      padding: EdgeInsets.all(8),
+      child: Row(
+        children: <Widget>[
+          Expanded(child:  TextField(
+            controller: _controller,
+            decoration: InputDecoration(
                 filled: false,
                 fillColor: Colors.transparent,
                 hintText: 'Alert People',
@@ -60,59 +62,46 @@ class _PostWidgetState extends State<PostWidget> {
               ),
               style: TextStyle(
                 color: Color(0xff212529),
+                fontFamily: 'Space grotesk',
               ),
-            ),
-          ),
-          Positioned(
-            top:50,
-              right: 10,
-              child: ElevatedButton(
-                onPressed: (){},
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
+                    onChanged: (value){
+                      setState(() {
+
+                        _enteredMsg = value;
+                      });
+                    },
                   ),
-                ),
-                child: Text('Post', style: TextStyle(color: Color(0xffffffff))),
-              ),
+                  ),
+
+          IconButton(
+            color: Color(0xff212529),
+            icon: Icon(Icons.image),
+            onPressed: () async {
+
+              String filename = DateTime.now().microsecondsSinceEpoch.toString();
+
+              ImagePicker img_pik = ImagePicker();
+              XFile? file = await img_pik.pickImage(source: ImageSource.camera);
+              print('${file?.path}');
+              if(file == null) return;
+              Reference referenceRoot = FirebaseStorage.instance.ref();
+              Reference refDirImgs=referenceRoot.child('images');
+
+              Reference reftoimgUpload = refDirImgs.child(filename);
+              await reftoimgUpload.putFile(File(file.path));
+              _imgUrl = await reftoimgUpload.getDownloadURL();
+            },
           ),
-          Positioned(
-            top:50,
-            right: 70,
-            child:Container(
-              child: IconButton(
-                color: Color(0xff212529),
-
-                icon: Icon(Icons.image),
-                onPressed: () async {
-                  String filename = DateTime.now().microsecondsSinceEpoch.toString();
-
-                  ImagePicker img_pik = ImagePicker();
-                  XFile? file = await img_pik.pickImage(source: ImageSource.camera);
-                  print('${file?.path}');
-                  if(file == null) return;
-                  Reference referenceRoot = FirebaseStorage.instance.ref();
-                  Reference refDirImgs=referenceRoot.child('images');
-
-                  Reference reftoimgUpload = refDirImgs.child(filename);
-                  try{
-                    await reftoimgUpload.putFile(File(file!.path));
-                    imgurl = await reftoimgUpload.getDownloadURL();
-
-                  }catch(error){
-
-                  }
-
-                },
-              ),
-            ),
-          ),
+          IconButton(
+              color: Color(0xff212529),
+              icon: Icon(Icons.send),
+              onPressed: (){
+                _sendMsg(_imgUrl,_enteredMsg);
+              }
+          )
         ],
       ),
-
-    );
+    );//i
   }
+
 }
