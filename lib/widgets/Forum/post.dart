@@ -17,14 +17,13 @@ class _PostWidget extends State<PostWidget>{
   var _enteredMsg = '';
   bool img_click = false;
   var Timee = DateTime.now();
-  Future<void> _sendMsg(String _imgUrl,var _enteredMsg) async {
-
+  Future<void> _sendMsg(String imgUrl,var _enteredMsg) async {
       Position position = await getLoc();
       FocusScope.of(context).unfocus();
       FirebaseFirestore.instance.collection('chat').add({
         'text' : _enteredMsg,
         'time' : Timestamp.now(),
-        'image': _imgUrl,
+        'image': imgUrl,
         'Lat' : position.latitude,
         'Long': position.longitude,
         'year': Timee.year,
@@ -35,7 +34,6 @@ class _PostWidget extends State<PostWidget>{
       });
 
       _controller.clear();
-      _imgUrl = '';
   }
   Future<Position> getLoc() async{
     await Geolocator.checkPermission();
@@ -96,6 +94,7 @@ class _PostWidget extends State<PostWidget>{
               icon: Icon(Icons.send),
               onPressed: (){
                 _sendMsg(_imgUrl,_enteredMsg);
+                _imgUrl='';
               }
           )
         ],
