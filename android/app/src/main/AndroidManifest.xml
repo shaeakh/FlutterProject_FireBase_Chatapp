@@ -1,10 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <application
         android:label="flutterproject_firebase_chatapp"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data>
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBPhaef11OJlYZ8H6aBGSIH94dALiw_XZI"
+        </meta-data>
         <activity
             android:name=".MainActivity"
             android:exported="true"

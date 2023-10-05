@@ -19,24 +19,18 @@ class _PostWidget extends State<PostWidget>{
   CollectionReference _reference =
   FirebaseFirestore.instance.collection('chat');
   Future<void> _sendMsg(String _imgUrl,var _enteredMsg) async {
-    if (_imgUrl.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Please upload an image')));
 
-      return;
-    }
-    Position position = await getLoc();
-    FocusScope.of(context).unfocus();
-    FirebaseFirestore.instance.collection('chat').add({
-      'text' : _enteredMsg,
-      'time' : Timestamp.now(),
-      'image': _imgUrl,
-      'Lat' :'${position.latitude}',
-      'Long': '${position.longitude}',
-    });g
-    _controller.clear();
-    _imgUrl = '';
-
+      Position position = await getLoc();
+      FocusScope.of(context).unfocus();
+      FirebaseFirestore.instance.collection('chat').add({
+        'text' : _enteredMsg,
+        'time' : Timestamp.now(),
+        'image': _imgUrl,
+        'Lat' : '${position.latitude}',
+        'Long': '${position.longitude}',
+      });
+      _controller.clear();
+      _imgUrl = '';
   }
   Future<Position> getLoc() async{
     await Geolocator.checkPermission();
@@ -101,7 +95,7 @@ class _PostWidget extends State<PostWidget>{
           )
         ],
       ),
-    );//i
+    );//
   }
 
 }

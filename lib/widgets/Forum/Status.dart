@@ -5,8 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Status extends StatelessWidget{
-  Status(this.mesg);
-  final String mesg;
+  Status(this.text,this.imageUrl,this.Lat,this.Long,this.time);
+  final String text;
+  final String imageUrl;
+  final String Lat;
+  final String Long;
+  final Timestamp time;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,10 +29,12 @@ class Status extends StatelessWidget{
 
       ),
       child: Text(
-        mesg,
+        text,
         style:  TextStyle(color: Colors.white),
 
       ),
     );
   }
+
+
 }

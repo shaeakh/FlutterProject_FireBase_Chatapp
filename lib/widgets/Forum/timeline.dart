@@ -9,7 +9,6 @@ class Timeline extends StatelessWidget{
     return StreamBuilder(
         stream: FirebaseFirestore.instance.collection('chat').orderBy(
             'time',
-            descending: true
         ).snapshots(),
         builder: (ctx, chatSnapshot){
           if(chatSnapshot.connectionState==ConnectionState.waiting){
@@ -19,7 +18,13 @@ class Timeline extends StatelessWidget{
           return ListView.builder(
             reverse: true,
             itemCount: chatSnapshot.data?.docs.length,
-            itemBuilder: (ctx,index) => Status(chatDocs?[index]['text']),
+            itemBuilder: (ctx,index) => Status(
+              chatDocs?[index]['text'],
+              chatDocs?[index]['image'],
+              chatDocs?[index]['Lat'],
+              chatDocs?[index]['Long'],
+              chatDocs?[index]['time'],
+            ),
           );
         }
     );
