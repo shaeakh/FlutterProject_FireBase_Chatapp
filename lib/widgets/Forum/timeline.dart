@@ -24,6 +24,12 @@ class Timeline extends StatelessWidget{
               chatDocs?[index]['Lat'],
               chatDocs?[index]['Long'],
               chatDocs?[index]['time'],
+              chatDocs?[index]['year'],
+              chatDocs?[index]['month'],
+              chatDocs?[index]['day'],
+              chatDocs?[index]['hour'],
+              chatDocs?[index]['min'],
+
             ),
           );
         }

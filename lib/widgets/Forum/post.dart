@@ -16,8 +16,7 @@ class _PostWidget extends State<PostWidget>{
   final _controller = new TextEditingController();
   var _enteredMsg = '';
   bool img_click = false;
-  CollectionReference _reference =
-  FirebaseFirestore.instance.collection('chat');
+  var Timee = DateTime.now();
   Future<void> _sendMsg(String _imgUrl,var _enteredMsg) async {
 
       Position position = await getLoc();
@@ -26,9 +25,15 @@ class _PostWidget extends State<PostWidget>{
         'text' : _enteredMsg,
         'time' : Timestamp.now(),
         'image': _imgUrl,
-        'Lat' : '${position.latitude}',
-        'Long': '${position.longitude}',
+        'Lat' : position.latitude,
+        'Long': position.longitude,
+        'year': Timee.year,
+        'month': Timee.month,
+        'day': Timee.day,
+        'hour': Timee.hour,
+        'min': Timee.minute,
       });
+
       _controller.clear();
       _imgUrl = '';
   }
