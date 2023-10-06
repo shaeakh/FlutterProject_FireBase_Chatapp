@@ -7,8 +7,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:geolocator/geolocator.dart';
 
 class PostWidget extends StatefulWidget{
+  String s;
+  PostWidget(this.s);
+
   @override
-  _PostWidget createState() => _PostWidget() ;
+  _PostWidget createState() => _PostWidget(s) ;
 }
 
 class _PostWidget extends State<PostWidget>{
@@ -17,10 +20,12 @@ class _PostWidget extends State<PostWidget>{
   var _enteredMsg = '';
   bool img_click = false;
   var Timee = DateTime.now();
+  String s;
+  _PostWidget(this.s);
   Future<void> _sendMsg(String imgUrl,var _enteredMsg) async {
       Position position = await getLoc();
       FocusScope.of(context).unfocus();
-      FirebaseFirestore.instance.collection('chat').add({
+      FirebaseFirestore.instance.collection(s).add({
         'text' : _enteredMsg,
         'time' : Timestamp.now(),
         'image': imgUrl,
@@ -72,9 +77,8 @@ class _PostWidget extends State<PostWidget>{
 
           IconButton(
             color: Color(0xff212529),
-            icon: Icon(Icons.image),
+            icon: Icon(Icons.camera_alt),
             onPressed: () async {
-
               String filename = DateTime.now().microsecondsSinceEpoch.toString();
 
               ImagePicker img_pik = ImagePicker();
@@ -82,7 +86,7 @@ class _PostWidget extends State<PostWidget>{
               print('${file?.path}');
               if(file == null) return;
               Reference referenceRoot = FirebaseStorage.instance.ref();
-              Reference refDirImgs=referenceRoot.child('images');
+              Reference refDirImgs=referenceRoot.child(s);
 
               Reference reftoimgUpload = refDirImgs.child(filename);
               await reftoimgUpload.putFile(File(file.path));
@@ -99,7 +103,6 @@ class _PostWidget extends State<PostWidget>{
           )
         ],
       ),
-    );//
+    );
   }
-
 }

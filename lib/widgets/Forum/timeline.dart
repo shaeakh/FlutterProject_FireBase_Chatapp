@@ -4,10 +4,13 @@ import 'package:flutterproject_firebase_chatapp/widgets/chat/msg_bbl.dart';
 import 'package:flutterproject_firebase_chatapp/widgets/Forum/Status.dart';
 
 class Timeline extends StatelessWidget{
+  final String s ;
+  Timeline(this.s);
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('chat').orderBy(
+        stream: FirebaseFirestore.instance.collection(s).orderBy(
             'time',
         ).snapshots(),
         builder: (ctx, chatSnapshot){
@@ -29,7 +32,6 @@ class Timeline extends StatelessWidget{
               chatDocs?[index]['day'],
               chatDocs?[index]['hour'],
               chatDocs?[index]['min'],
-
             ),
           );
         }
