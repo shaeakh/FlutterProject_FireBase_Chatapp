@@ -45,6 +45,8 @@ dependencies:
   cached_network_image: ^3.3.0
   intl: ^0.18.1
   geocoding: ^2.1.0
+  contacts_service: ^0.6.3
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_test:

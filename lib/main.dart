@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterproject_firebase_chatapp/firebase_options.dart';
+import 'package:flutterproject_firebase_chatapp/screens/SOS.dart';
 import 'package:flutterproject_firebase_chatapp/screens/auth_screen.dart';
 import 'package:flutterproject_firebase_chatapp/screens/chat_screen.dart';
 import 'package:flutterproject_firebase_chatapp/screens/alert.dart';
@@ -36,11 +37,13 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      //home: ChatScreen(),
+      //home: ChatScreen
+      // (),
       //home: NeonLights(),
-      home: Forum(),
+      //home: Forum(),
       //home:  GglMap(title: 'gglmap',),
       //home: Standby(),
+      home: SOSpage(),
     );
   }
 }

@@ -121,8 +121,6 @@ class Status extends StatelessWidget{
                 colors: [
                   Colors.transparent,
                   Color(0xff212529),
-                  Color(0xff000000),
-                  Color(0xff212529),
                   Colors.transparent,
                 ],
               ),
