@@ -19,9 +19,9 @@ class _SOSpage extends State<SOSpage> {
       body: Scaffold(
         body: Column(
           children: [
-            Contacts('Police','017******'),
-            Contacts('Ambulance','017******'),
-            //Contacts('FireService','017******'),
+            Contacts('Police','999'),
+            Contacts('Ambulance','01704718964'),
+            Contacts('FireService','16103'),
             //Contacts('Help Center','017******'),
             //Contacts('Animal Help','017******'),
             //Contacts('Doctor','017******'),

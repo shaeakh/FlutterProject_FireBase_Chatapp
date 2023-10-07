@@ -38,12 +38,11 @@ class MyApp extends StatelessWidget {
         ),
       ),
       //home: ChatScreen
-      // (),
-      //home: NeonLights(),
-      //home: Forum(),
+      //home: NeonLights(),      //home: NeonLights(),
+      home: Forum(),
       //home:  GglMap(title: 'gglmap',),
       //home: Standby(),
-      home: SOSpage(),
+      //home: SOSpage(),
     );
   }
 }

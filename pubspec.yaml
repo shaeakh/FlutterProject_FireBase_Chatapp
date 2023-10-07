@@ -47,6 +47,7 @@ dependencies:
   geocoding: ^2.1.0
   contacts_service: ^0.6.3
   url_launcher: ^6.1.14
+  flutter_phone_direct_caller: ^2.1.1
 
 dev_dependencies:
   flutter_test:

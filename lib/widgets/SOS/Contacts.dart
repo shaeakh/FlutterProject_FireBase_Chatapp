@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterproject_firebase_chatapp/widgets/auth/auth_form.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class Contacts extends StatefulWidget {
   final String Name;
@@ -21,9 +22,7 @@ class _Contacts extends State<Contacts> {
     //print(imagelink);
     final ScreenWeidth = MediaQuery.of(context).size.width;
     final Screenheight = MediaQuery.of(context).size.height;
-    return GestureDetector(
-      onTap: (){},
-      child: Container(
+    return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
@@ -88,11 +87,27 @@ class _Contacts extends State<Contacts> {
                   ],
                 ),
               ),
+              Container(
+                child:Text( 'a',
+                  style: TextStyle(
+                    color: Colors.transparent,
+                    fontSize: 2, // Adjust this value to change the font size
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                child: IconButton(
+                  icon: Icon(Icons.call), // Use the Icons.call icon
+                  onPressed: () async{
+                    await FlutterPhoneDirectCaller.callNumber(PhoneNumber);
+                  },
+                )
+
+              ),
             ],
           ),
         ),
-      ),
-
-    );
+      );
   }
 }
